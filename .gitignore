@@ -43,3 +43,5 @@
 /build
 /captures
 .externalNativeBuild
+.gradle/4.10.1/vcsMetadata-1/
+app/libs/
