@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,7 +57,7 @@ public class ItemListActivity extends AppCompatActivity {
         @NonNull
         @Override
         public RecordViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-            Log.d(TAG, "onCreateViewHolder " + mRecycleView.getChildCount());
+            Log.d(TAG, "onCreateViewHolder " + viewGroup.getChildCount());
             View view = LayoutInflater.from(viewGroup.getContext())
                     .inflate(R.layout.item_record, viewGroup, false);
             return new RecordViewHolder(view);
@@ -64,6 +65,7 @@ public class ItemListActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull RecordViewHolder viewHolder, int i) {
+            Log.d(TAG, "onBindViewHolder " + mRecycleView.getChildCount() +  " position: " + i);
             Record record = mData.get(i);
             viewHolder.applyData(record);
         }
@@ -85,8 +87,12 @@ public class ItemListActivity extends AppCompatActivity {
         }
 
         public void applyData(Record record) {
+            Log.d(TAG, "applyData "
+                    + mRecycleView.getChildLayoutPosition(itemView)
+                    + " " + record.getTitle());
             title.setText(record.getTitle());
             price.setText(String.valueOf(record.getPrice()));
+            SpannableString spannableString = new SpannableString(String.valueOf(record.getPrice()));
         }
     }
 }
