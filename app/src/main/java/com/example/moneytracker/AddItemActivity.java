@@ -55,7 +55,6 @@ public class AddItemActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                //price.setText(s + "₴");
                 btnActivate();
             }
         };
@@ -75,11 +74,12 @@ public class AddItemActivity extends AppCompatActivity {
                         price.setText(resultPriceString);
                     }
                 } else {
+                    Log.i(TAG, "onFocusChange: есть фокус и значение поля price");
                     //есть фокус и значение поля price оканчивается на символ валюты - убрать символ валюты
                     String priceString = price.getText().toString();
                     if (priceString.endsWith(symbolVal)) {
-                        priceString.replaceAll(symbolVal, "");
-                        price.setText(priceString);
+                        price.setText(priceString.replaceAll(symbolVal, ""));
+                        Log.i(TAG, "onFocusChange: и значение поля price оканчивается на символ валют ");
                     }
                 }
             }
@@ -88,28 +88,6 @@ public class AddItemActivity extends AppCompatActivity {
         name.addTextChangedListener(watcher);
         price.addTextChangedListener(watcher);
 
-/*
-        name.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                //logi + tab
-                Log.i(TAG, "afterTextChanged: " + s);
-
-                //если поле name не пустое, активировать кнопку +
-                addButton.setEnabled(!TextUtils.isEmpty(s));
-            }
-        });
-*/
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
