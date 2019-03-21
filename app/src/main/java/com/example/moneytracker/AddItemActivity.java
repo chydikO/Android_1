@@ -36,6 +36,8 @@ public class AddItemActivity extends AppCompatActivity {
         price = findViewById(R.id.price);
         addButton = findViewById(R.id.addButon);
 
+        final String symbolVal = getResources().getString(R.string.symbol_val);
+
         final TextWatcher watcher = new TextWatcher() {
 
             @Override
@@ -54,11 +56,38 @@ public class AddItemActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 //price.setText(s + "₴");
+                btnActivate();
             }
         };
 
+        price.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                Log.i(TAG, "onFocusChange: " + " hasFocus is: " + hasFocus);
+                //если нет фокуса и поле price не пустое , добавить знак валюты к числу
+                if (!hasFocus) {
+                    if (!price.getText().toString().isEmpty()) {
+                        //установить значению поля price = price + val_symbol
+                        //String valSymbol = getResources().getString(R.string.);
+
+                        String priceString = getResources().getString(R.string.string_price_with_val);
+                        String resultPriceString = String.format(priceString, String.valueOf(price.getText()));
+                        price.setText(resultPriceString);
+                    }
+                } else {
+                    //есть фокус и значение поля price оканчивается на символ валюты - убрать символ валюты
+                    String priceString = price.getText().toString();
+                    if (priceString.endsWith(symbolVal)) {
+                        priceString.replaceAll(symbolVal, "");
+                        price.setText(priceString);
+                    }
+                }
+            }
+        });
+
         name.addTextChangedListener(watcher);
         price.addTextChangedListener(watcher);
+
 /*
         name.addTextChangedListener(new TextWatcher() {
             @Override
@@ -85,8 +114,15 @@ public class AddItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
             String itemName = name.getText().toString();
-            String itemPrice = name.getText().toString();
+            String itemPrice = price.getText().toString();
             }
         });
+
+    }
+
+    private void btnActivate() {
+        addButton.setEnabled(!TextUtils.isEmpty(name.getText().toString())
+                                && !TextUtils.isEmpty(price.getText().toString()));
+
     }
 }

@@ -91,8 +91,14 @@ public class ItemListActivity extends AppCompatActivity {
                     + mRecycleView.getChildLayoutPosition(itemView)
                     + " " + record.getTitle());
             title.setText(record.getTitle());
-            price.setText(String.valueOf(record.getPrice()));
-            SpannableString spannableString = new SpannableString(String.valueOf(record.getPrice()));
+//            price.setText(String.valueOf(record.getPrice()));
+
+//          String.format - http://developer.alexanderklimov.ru/android/java/string.php
+            String priceString = getResources().getString(R.string.string_price_with_val);
+            String resultPriceString = String.format(priceString, String.valueOf(record.getPrice()));
+            price.setText(resultPriceString);
+
+//            SpannableString spannableString = new SpannableString(String.valueOf(record.getPrice()));
         }
     }
 }
