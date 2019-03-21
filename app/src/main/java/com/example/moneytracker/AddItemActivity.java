@@ -66,9 +66,6 @@ public class AddItemActivity extends AppCompatActivity {
                 //если нет фокуса и поле price не пустое , добавить знак валюты к числу
                 if (!hasFocus) {
                     if (!price.getText().toString().isEmpty()) {
-                        //установить значению поля price = price + val_symbol
-                        //String valSymbol = getResources().getString(R.string.);
-
                         String priceString = getResources().getString(R.string.string_price_with_val);
                         String resultPriceString = String.format(priceString, String.valueOf(price.getText()));
                         price.setText(resultPriceString);

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Money Tracker</string>
     <string name="add_item_title">"Новая запись"</string>
-    <string name="string_price_with_val">"1%s ₴"</string>
+    <string name="string_price_with_val">"%s ₴"</string>
     <string name="symbol_val">"₴"</string>
     <string name="activity_items_list_title">"Учет бюджета"</string>
 </resources>
